@@ -6,11 +6,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: action/checkout@v1
+      - uses: actions/checkout@v1
       - name: npm install and build webpack
         run: |
           npm install
           npm run build
+      - uses: actions/upload-artifact@master
+        with:
+          name: webpack artifacts
+          path: public/ 
 
   test:
     runs-on: [ubuntu-latest]
@@ -18,7 +22,6 @@ jobs:
       matrix:
         os: [ubuntu-lastest, windows-2016]
         node-version: [8.x, 10.x]
-        os: [ubuntu-lastest, windows-2016]
 
     steps:
     - uses: actions/checkout@v1
